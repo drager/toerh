@@ -1,28 +1,21 @@
 TOERH
 ===========
-Webbramverk - 1DV450
 
-[![Build Status](https://travis-ci.org/jh222xk/toerh.svg?branch=master)](https://travis-ci.org/jh222xk/toerh)
+[![Build Status](https://travis-ci.org/drager/toerh.svg?branch=master)](https://travis-ci.org/drager/toerh)
 
-[![Coverage Status](https://coveralls.io/repos/jh222xk/toerh/badge.svg)](https://coveralls.io/r/jh222xk/toerh)
+[![Coverage Status](https://coveralls.io/repos/drager/toerh/badge.svg)](https://coveralls.io/r/drager/toerh)
 
 # API
 
-See [api.md](https://github.com/jh222xk/toerh/blob/master/api.md)
+See [api.md](https://github.com/drager/toerh/blob/master/api.md)
 
 ## Postman
-Postman collection can be found [here](https://github.com/jh222xk/toerh/blob/master/API.json.postman_collection)
+Postman collection can be found [here](https://github.com/drager/toerh/blob/master/API.json.postman_collection)
 
 # Run the application
 
-## Live
-If you can't get python to run nicely on windows or such you can view the application here:
-http://128.199.44.244:1337/
-
-*This is now updated and works fine.*
-
 ## Get the project
-First of all clone this repository: `git clone https://github.com/jh222xk/toerh.git`
+First of all clone this repository: `git clone https://github.com/drager/toerh.git`
 
 You also need to set `TOERH_DJANGO_SECRET_KEY`
 

@@ -10,7 +10,7 @@ class PositionAdmin(admin.ModelAdmin):
 
 @admin.register(Coffee)
 class CoffeeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'position')
+    list_display = ('name', 'latitude', 'longitude')
     fields = ('name', 'address', 'description', 'tags',)
 
 

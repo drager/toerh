@@ -3,6 +3,9 @@ django>=1.7
 
 pillow
 
+# Database
+psycopg2
+
 # Elasticsearch
 pyelasticsearch
 

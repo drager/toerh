@@ -22,8 +22,8 @@ def content_file_name(filename):
 
 
 class Position(models.Model):
-    longitude = models.FloatField(default=0)
-    latitude = models.FloatField(default=0)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
@@ -48,8 +48,10 @@ class Coffee(models.Model):
     name = models.CharField(max_length=128)
     address = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to=content_file_name, default='media/pictures/no-image.jpg')
-    position = models.ForeignKey(Position)
+    image = models.ImageField(upload_to=content_file_name, default='media/pictures/no-image.jpg', max_length=10000000)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    #position = models.ForeignKey(Position)
     tags = models.ManyToManyField(Tag)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -57,30 +59,30 @@ class Coffee(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        """
-        Creates a position bonded to a coffeehouse
-        Creates only on coffee-creation.
-        """
-        if self.pk is None:
-            geo = json.loads(self.get_lat_lon(self.address))
-            position = Position()
-            if geo['status'] == "OK":
-                position.latitude = geo['results'][0]['geometry']['location']['lat']
-                position.longitude = geo['results'][0]['geometry']['location']['lng']
-            position.save()
-            self.position = position
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     """
+    #     Creates a position bonded to a coffeehouse
+    #     Creates only on coffee-creation.
+    #     """
+    #     if self.pk is None:
+    #         geo = json.loads(self.get_lat_lon(self.address))
+    #         position = Position()
+    #         if geo['status'] == "OK":
+    #             position.latitude = geo['results'][0]['geometry']['location']['lat']
+    #             position.longitude = geo['results'][0]['geometry']['location']['lng']
+    #         position.save()
+    #         self.position = position
+    #     super().save(*args, **kwargs)
 
-    def get_lat_lon(self, address):
-        """
-        Fetches the latitude and longitude from an address
-        from Google's API
-        """
-        address = urllib.parse.quote_plus(address)
-        geo = urllib.request.urlopen(
-            "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=%s" % address)
-        return geo.readall().decode('utf-8')
+    # def get_lat_lon(self, address):
+    #     """
+    #     Fetches the latitude and longitude from an address
+    #     from Google's API
+    #     """
+    #     address = urllib.parse.quote_plus(address)
+    #     geo = urllib.request.urlopen(
+    #         "https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=%s" % address)
+    #     return geo.readall().decode('utf-8')
 
     @property
     def rating(self):

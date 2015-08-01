@@ -28,8 +28,8 @@ class SearchIndex(object):
                     "address": m.address,
                     "description": m.description,
                     "location": {
-                        "lon": m.position.longitude,
-                        "lat": m.position.latitude
+                        "lon": m.longitude,
+                        "lat": m.latitude
                     }
                 }),
                 ],

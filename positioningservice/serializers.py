@@ -75,20 +75,20 @@ class PositionSerializer(ModelSerializer):
     Serializing all the Positions
     """
 
-    links = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Position
-        fields = ('longitude', 'latitude', 'links', 'created_at',)
-
-    def get_links(self, obj):
-        request = self.context['request']
-        return {
-            'self': reverse('api-v1:position-detail',
-                            kwargs={'pk': obj.pk}, request=request) + '?key={}'.format(request.query_params.get('key')),
-
-
-        }
+    # links = serializers.SerializerMethodField()
+    #
+    # class Meta:
+    #     model = Position
+    #     fields = ('longitude', 'latitude', 'links', 'created_at',)
+    #
+    # def get_links(self, obj):
+    #     request = self.context['request']
+    #     return {
+    #         'self': reverse('api-v1:position-detail',
+    #                         kwargs={'pk': obj.pk}, request=request) + '?key={}'.format(request.query_params.get('key')),
+    #
+    #
+    #     }
 
 
 class ReviewSerializer(ModelSerializer):
@@ -131,15 +131,15 @@ class CoffeeSerializer(ModelSerializer):
     """
     Serializing all the Coffeehouses
     """
-    position = PositionSerializer(many=False, read_only=True)
-    reviews = ReviewCoffee(many=True, read_only=True, source='review')
+    #position = PositionSerializer(many=False, read_only=True)
+    #reviews = ReviewCoffee(many=True, read_only=True, source='review')
     links = serializers.SerializerMethodField()
     tags = TagSerializer(many=True)
-    image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=False)
 
     class Meta:
         model = Coffee
-        fields = ('id', 'name', 'address', 'rating', 'links', 'description', 'position', 'image', 'tags', 'reviews',)
+        fields = ('id', 'name', 'address', 'rating', 'links', 'description', 'image', 'latitude', 'longitude', 'tags',)
 
     def get_links(self, obj):
         request = self.context['request']
